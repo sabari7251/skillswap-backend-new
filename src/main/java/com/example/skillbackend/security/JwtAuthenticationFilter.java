@@ -58,7 +58,7 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
             filterChain.doFilter(request, response);
             return;
         }
-
+        try{
         final String jwt = extractJwt(authHeader);
         if (jwt == null || jwt.isBlank()) {
             filterChain.doFilter(request, response);
@@ -82,6 +82,10 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
             );
 
             SecurityContextHolder.getContext().setAuthentication(authToken);
+        }
+        }
+        catch(Exception e){
+            System.out.println(e.getMessage());
         }
 
         filterChain.doFilter(request, response);

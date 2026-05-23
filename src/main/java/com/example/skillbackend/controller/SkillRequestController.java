@@ -1,6 +1,7 @@
 package com.example.skillbackend.controller;
 
 import com.example.skillbackend.dto.SendRequest;
+import com.example.skillbackend.dto.ViewRequest;
 import com.example.skillbackend.model.SkillRequest;
 import com.example.skillbackend.service.SkillRequestService;
 import lombok.RequiredArgsConstructor;
@@ -26,13 +27,28 @@ public class SkillRequestController {
         return ResponseEntity.status(HttpStatus.OK).body(skillRequestService.viewRequests(authentication.getName()));
     }
 
+    @GetMapping("/viewlite")
+    public ResponseEntity<List<ViewRequest>> viewLiteRequests(Authentication authentication){
+        return ResponseEntity.status(HttpStatus.OK).body(skillRequestService.viewLiteRequests(authentication.getName()));
+    }
+
+    @GetMapping("/viewmyrequest")
+    public ResponseEntity<List<ViewRequest>> viewMyRequests(Authentication authentication){
+        return ResponseEntity.status(HttpStatus.OK).body(skillRequestService.viewMyRequests(authentication.getName()));
+    }
+
+    @GetMapping("/viewall")
+    public ResponseEntity<List<ViewRequest>> viewAllRequests(Authentication authentication){
+        return ResponseEntity.status(HttpStatus.OK).body(skillRequestService.viewAllRequests());
+    }
+
     @PutMapping("/{id}/accept")
     public ResponseEntity<SkillRequest> acceptRequest(@PathVariable Long id){
         return ResponseEntity.status(HttpStatus.OK).body(skillRequestService.acceptRequest(id));
     }
 
     @PutMapping("/{id}/reject")
-    public ResponseEntity<SkillRequest> rejectRequest(@PathVariable Long id){
+    public ResponseEntity<String> rejectRequest(@PathVariable Long id){
         return ResponseEntity.status(HttpStatus.OK).body(skillRequestService.rejectRequest(id));
     }
 

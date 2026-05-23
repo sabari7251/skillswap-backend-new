@@ -10,4 +10,5 @@ import java.util.List;
 @Repository
 public interface SkillRequestRepository extends JpaRepository<SkillRequest,Long> {
     public List<SkillRequest> findByReceiver(User receiver);
+    public List<SkillRequest> findBySender(User sender);
 }

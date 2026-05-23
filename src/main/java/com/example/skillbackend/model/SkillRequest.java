@@ -18,5 +18,6 @@ public class SkillRequest {
     private User receiver;
     private String Status;
     private String message;
+    private String skill;
     private LocalDateTime createdAt = LocalDateTime.now();
 }

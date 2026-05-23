@@ -8,4 +8,5 @@ import lombok.RequiredArgsConstructor;
 public class SendRequest {
     private String receiverEmail;
     private String message;
+    private String skill;
 }

@@ -9,20 +9,35 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 @RequestMapping("/api/user")
 @RequiredArgsConstructor
 public class UserController {
     private final UserService userService;
-    @GetMapping("/me")
-    public String me() {
 
-        return "Protected route accessed";
-    }
 
     @PutMapping("/profile")
     public ResponseEntity<User> updateProfile(Authentication authentication, @RequestBody UpdateProfileRequest request) {
 
         return ResponseEntity.status(HttpStatus.ACCEPTED).body(userService.updateProfile(request,authentication.getName()));
     }
+
+    @GetMapping("/myprofile")
+    public ResponseEntity<UpdateProfileRequest> getProfile(Authentication authentication){
+        return ResponseEntity.status(HttpStatus.OK).body(userService.getProfile(authentication.getName()));
+    }
+
+    @GetMapping("/allusers")
+    public ResponseEntity<List<User>> getUsers(Authentication authentication){
+        return ResponseEntity.status(HttpStatus.OK).body(userService.getUsers(authentication.getName()));
+    }
+
+    @GetMapping("/me")
+    public ResponseEntity<User> getUser(Authentication authentication){
+        return ResponseEntity.status(HttpStatus.OK).body(userService.getUser(authentication.getName()));
+    }
+
+
 }
