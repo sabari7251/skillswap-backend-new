@@ -26,7 +26,7 @@ public class SecurityConfig {
 
         CorsConfiguration configuration = new CorsConfiguration();
 
-        configuration.addAllowedOriginPattern("http://localhost:*");
+        configuration.addAllowedOriginPattern("*");
 
         configuration.addAllowedMethod("*");
 
